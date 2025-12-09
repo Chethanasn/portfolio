@@ -119,6 +119,43 @@
             margin-bottom: 1rem;
             border: 1px solid #eee;
         }
+        /* Custom styles for the horizontal sliding/scrolling section */
+        .scroll-container {
+            width: 100%;
+            overflow-x: scroll; /* Enables horizontal scrolling */
+            -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS */
+            padding-bottom: 1rem; /* Space for the scrollbar */
+            scroll-snap-type: x mandatory; /* Enables smooth snapping */
+        }
+        .scroll-cards {
+            display: flex;
+            flex-wrap: nowrap; /* Prevents cards from wrapping to a new line */
+            gap: 1.5rem;
+            padding: 0 0.5rem; /* Small internal padding for edges */
+        }
+        .scroll-card-item {
+            flex: 0 0 auto; /* Ensures cards maintain their size */
+            width: 300px; /* Fixed width for the card item */
+            min-height: 400px; /* Ensure visual consistency */
+            background-color: white;
+            border: 1px solid #10b981; /* Green border from reference image */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            position: relative; /* For aligning certificate image */
+            scroll-snap-align: center; /* Snaps the center of the card to the scroll position */
+        }
+        .scroll-card-item:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .cert-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -131,7 +168,7 @@
                 <span class="text-sm font-light text-white opacity-90">Web Developer</span>
             </div>
             
-            <!-- Desktop Navigation Links (Aligning layout to image_af9e19.jpg) -->
+            <!-- Desktop Navigation Links (Updated - Added Education back) -->
             <div class="hidden sm:flex space-x-6">
                 <!-- Resume Link (Standalone button style) -->
                 <a href="#" target="_blank" class="text-white hover:text-gray-200 transition duration-150 font-medium flex items-center">
@@ -145,6 +182,10 @@
                 <a href="#projects" class="text-white hover:text-gray-200 transition duration-150 font-medium flex items-center">
                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10l-4-4m4 4l4-4m4-4v10m0-10l4 4m-4-4l-4 4"></path></svg>
                     Projects
+                </a>
+                 <a href="#education" class="text-white hover:text-gray-200 transition duration-150 font-medium flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13.437M12 6.253c1.545 0 2.91-1.168 3.5-2.5 0 0-1.545 1.168-3.5 2.5zM12 6.253c-1.545 0-2.91-1.168-3.5-2.5 0 0 1.545 1.168 3.5 2.5z"></path></svg>
+                    Education
                 </a>
                 <a href="#contact" class="text-white hover:text-gray-200 transition duration-150 font-medium flex items-center">
                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-17 4v7a2 2 0 002 2h12a2 2 0 002-2v-7"></path></svg>
@@ -317,8 +358,10 @@
 
                         <h4 class="text-xl font-bold text-gray-900 mb-2">Document Tracking System (Android)</h4>
                         <p class="text-sm font-medium text-primary mb-3">Mobile Application | Sep 2025 - Oct 2025</p>
-                        <p class="text-gray-700 mb-4 text-sm">Android-based system for securely storing, managing, and monitoring documents with real-time status updates using MVVM architecture.</p>
-                        <p class="text-xs font-semibold text-gray-500 mb-4">Tech Stack: Android, Gradle, Firebase, Java, MVVM</p>
+                        <p class="text-gray-700 mb-4 text-sm">This Android-based Document Tracking System allows users to securely store, manage, and monitor documents within an organization
+It enables efficient tracking, quick retrieval, and real-time status updates, ensuring smooth workflow and improved document
+management efficiency.</p>
+                        <p class="text-xs font-semibold text-gray-500 mb-4">Tech Stack: Android, Gradle, Firebase, Java, XML</p>
                     </div>
                     <div class="flex space-x-3 mt-4">
                         <a href="#" target="_blank" class="btn-demo text-center">View Demo</a>
@@ -350,46 +393,98 @@
             </div>
         </section>
         
-        <!-- Courses and Certifications Section (Mimicking the card layout from image_af9ad4.png) -->
+        <!-- Courses and Certifications Section (Horizontally Scrolling Layout) -->
         <section id="education" class="py-16 border-t border-gray-100">
-            <h2 class="section-heading-custom text-primary">EDUCATION & CERTIFICATES</h2>
+            <h2 class="section-heading-custom text-primary">CERTIFICATES</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Education: MCA -->
-                <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-green-500 flex flex-col justify-between">
-                    <div>
-                        <p class="text-xs text-gray-500 mb-1">July 2024 – July 2026</p>
-                        <h4 class="text-lg font-bold text-gray-900 mb-1">Master of Computer Application (MCA)</h4>
-                        <p class="text-primary font-medium text-sm">Manipal Institute of Technology</p>
-                        <p class="text-sm text-gray-600 mt-3">Manipal, India</p>
+            <!-- Outer container for horizontal scrolling -->
+            <div class="scroll-container">
+                <div class="scroll-cards">
+                    
+                    <!-- Card 3: Microsoft FullStack Developer Certification -->
+                    <div class="scroll-card-item bg-white">
+                        <div class="pb-4 mb-2">
+                            <img src="https://placehold.co/100x120/d1e7c5/10b981?text=Cert%5C1Image" alt="Certificate Placeholder" class="cert-image">
+                            <h4 class="text-lg font-bold text-gray-900">Microsoft FullStack Developer</h4>
+                            <p class="text-primary font-medium text-sm">Coursera</p>
+                        </div>
+                        <div class="pt-2">
+                            <h5 class="font-semibold mb-1 text-sm">What I Learned:</h5>
+                            <ul class="list-disc pl-4 space-y-1 text-sm text-gray-700">
+                                <li>Comprehensive Full-Stack MERN stack concepts.</li>
+                                <li>Building scalable web applications.</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Education: BCA -->
-                <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-green-500 flex flex-col justify-between">
-                    <div>
-                        <p class="text-xs text-gray-500 mb-1">Oct 2021 – July 2024</p>
-                        <h4 class="text-lg font-bold text-gray-900 mb-1">Bachelor of Computer Application (BCA)</h4>
-                        <p class="text-primary font-medium text-sm">KLE Society's S Njalingappa College</p>
-                        <p class="text-sm text-gray-600 mt-3">Bengaluru, India</p>
+                    
+                    <!-- Card 4: Data Analytics Certification (UPDATED IMAGE LINK) -->
+                     <div class="scroll-card-item bg-white">
+                         <div class="pb-4 mb-2">
+                            <img src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/Certificate3.jpg" alt="Data Analytics Certificate" class="cert-image" onerror="this.onerror=null; this.src='https://placehold.co/100x120/f9f6e8/8d6e38?text=Cert%5C2Image';">
+                            <h4 class="text-lg font-bold text-gray-900">Data Analytics using ChatGPT with Excel and Python</h4>
+                            <p class="text-primary font-medium text-sm">GreatLearning</p>
+                        </div>
+                        <div class="pt-2">
+                            <h5 class="font-semibold mb-1 text-sm">Key Skills:</h5>
+                            <ul class="list-disc pl-4 space-y-1 text-sm text-gray-700">
+                                <li>Data manipulation and visualization using Python.</li>
+                                <li>Leveraging LLMs (ChatGPT) for analytical tasks.</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                    
+                    <!-- Card 5: Advanced Styling Certification (UPDATED IMAGE LINK) -->
+                     <div class="scroll-card-item bg-white">
+                         <div class="pb-4 mb-2">
+                            <img src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/Certificate1.jpg" alt="Advanced Styling Certificate" class="cert-image" onerror="this.onerror=null; this.src='https://placehold.co/100x120/c2d3ff/007bff?text=Cert%5C3Image';">
+                            <h4 class="text-lg font-bold text-gray-900">Advanced Styling with Responsive Design</h4>
+                            <p class="text-primary font-medium text-sm">University of Michigan (Coursera)</p>
+                        </div>
+                        <div class="pt-2">
+                            <h5 class="font-semibold mb-1 text-sm">Key Focus:</h5>
+                            <ul class="list-disc pl-4 space-y-1 text-sm text-gray-700">
+                                <li>CSS Flexbox and Grid mastery.</li>
+                                <li>Creating fluid, mobile-first web layouts.</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <!-- Certification 1 (Grouping all certs under one card) -->
-                <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-green-500 flex flex-col justify-between">
-                    <div>
-                        <h4 class="text-lg font-bold text-gray-900 mb-3">Key Certifications</h4>
-                        <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
-                            <li>Microsoft FullStack Developer - Coursera</li>
-                            <li>Data Analytics using ChatGPT with Excel and Python - GreatLearning</li>
-                            <li>Advanced Styling with Responsive Design - University of Michigan (Coursera)</li>
-                            <li>Visual Elements of User Interface Design - Calarts (Coursera)</li>
-                            <li>Prompt Engineering for ChatGPT - GreatLearning</li>
-                        </ul>
+                    <!-- Card 6: UI Design Certification (UPDATED IMAGE LINK) -->
+                     <div class="scroll-card-item bg-white">
+                         <div class="pb-4 mb-2">
+                            <img src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/Certificate2.jpg" alt="Visual Elements of User Interface Design Certificate" class="cert-image" onerror="this.onerror=null; this.src='https://placehold.co/100x120/f9f6e8/8d6e38?text=Cert%5C4Image';">
+                            <h4 class="text-lg font-bold text-gray-900">Visual Elements of User Interface Design</h4>
+                            <p class="text-primary font-medium text-sm">Calarts (Coursera)</p>
+                        </div>
+                        <div class="pt-2">
+                            <h5 class="font-semibold mb-1 text-sm">Key Focus:</h5>
+                            <ul class="list-disc pl-4 space-y-1 text-sm text-gray-700">
+                                <li>Typography, color theory, and visual hierarchy.</li>
+                                <li>Principles of attractive and usable UI design.</li>
+                            </ul>
+                        </div>
                     </div>
+                    
+                    <!-- Card 7: Prompt Engineering Certification (UPDATED IMAGE LINK) -->
+                     <div class="scroll-card-item bg-white">
+                         <div class="pb-4 mb-2">
+                            <img src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/Certificate4.jpg" alt="Prompt Engineering Certificate" class="cert-image" onerror="this.onerror=null; this.src='https://placehold.co/100x120/d1e7c5/10b981?text=Cert%5C5Image';">
+                            <h4 class="text-lg font-bold text-gray-900">Prompt Engineering for ChatGPT</h4>
+                            <p class="text-primary font-medium text-sm">GreatLearning</p>
+                        </div>
+                        <div class="pt-2">
+                            <h5 class="font-semibold mb-1 text-sm">Key Focus:</h5>
+                            <ul class="list-disc pl-4 space-y-1 text-sm text-gray-700">
+                                <li>Designing effective prompts for LLMs.</li>
+                                <li>Maximizing utility from generative AI tools.</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+            <!-- End Horizontal Scrolling Container -->
+
         </section>
 
         <!-- Contact Section (Mimicking the form layout from image_af9a9b.jpg) -->
@@ -495,9 +590,10 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu Functionality -->
+    <!-- JavaScript for Mobile Menu Functionality (and AUTO SCROLL) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Mobile Menu Toggle Logic ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const navLinks = document.querySelectorAll('#mobile-menu a');
@@ -512,6 +608,50 @@
                     mobileMenu.classList.add('hidden');
                 });
             });
+
+            // --- Horizontal Auto-Scroll Logic for Certificates ---
+            const scrollContainer = document.querySelector('.scroll-container');
+            const scrollCards = document.querySelector('.scroll-cards');
+            const cardCount = scrollCards.children.length;
+
+            if (scrollContainer && cardCount > 1) {
+                // Width of a single card + its gap (300px card width + 1.5rem gap = 324px)
+                const cardWidthWithMargin = 300 + (1.5 * parseFloat(getComputedStyle(scrollContainer).fontSize)); 
+                let scrollPosition = 0;
+
+                const autoScroll = () => {
+                    // Check if we are at the end of the scrollable content
+                    if (scrollPosition >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+                        // Reset to the start
+                        scrollPosition = 0;
+                    } else {
+                        // Move one card forward
+                        scrollPosition += cardWidthWithMargin;
+                        // Clamp to maximum scroll position
+                        if (scrollPosition > scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+                             scrollPosition = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+                        }
+                    }
+
+                    scrollContainer.scrollTo({
+                        left: scrollPosition,
+                        behavior: 'smooth'
+                    });
+                };
+
+                // Start the automatic scroll interval (e.g., every 4 seconds)
+                let scrollInterval = setInterval(autoScroll, 4000);
+
+                // Pause scrolling when the user hovers over the container (desktop experience)
+                scrollContainer.addEventListener('mouseover', () => {
+                    clearInterval(scrollInterval);
+                });
+
+                // Resume scrolling when the user moves the mouse away (desktop experience)
+                scrollContainer.addEventListener('mouseleave', () => {
+                    scrollInterval = setInterval(autoScroll, 4000);
+                });
+            }
         });
     </script>
 </body>
