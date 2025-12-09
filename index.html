@@ -353,13 +353,12 @@
                 
                 <!-- Left Column (Illustration) -->
                 <div class="flex justify-center items-center h-full hidden md:flex">
-                    <!-- FIX: Using a generic contact illustration placeholder that matches the theme. 
-                             Replace the 'src' below with your direct image link (e.g., from GitHub) if you want your original illustration. -->
+                    <!-- FINAL FIX: Inserted the user's Raw GitHub Image URL -->
                     <img 
-                        src="https://placehold.co/400x400/FFF0E6/FF6B6B/png?text=Let%27s+Connect" 
-                        alt="Contact Illustration: Girl using a phone with floating hearts" 
+                        src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/1.jpg" 
+                        alt="Contact Illustration: Chethana on the phone" 
                         class="contact-illustration rounded-xl shadow-lg"
-                        onerror="this.onerror=null; this.src='https://placehold.co/400x400/fff000/ffffff?text=Image+Load+Failed';"
+                        onerror="this.onerror=null; this.src='https://placehold.co/400x400/fff000/ffffff?text=Image+Load+Failed'; console.error('Image failed to load. Please ensure the URL is a direct link to the image file.');"
                     >
                 </div>
 
