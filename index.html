@@ -8,26 +8,31 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        /* --- Global Light Mode Styles --- */
+        
         body {
             font-family: 'Inter', sans-serif;
             background-color: #fcfcfc; /* Very light background */
-            scroll-behavior: smooth; /* For smooth scrolling when clicking nav links */
+            color: #333333; /* Dark text */
+            scroll-behavior: smooth;
         }
+
         /* Define the custom orange/red gradient based on the reference images */
         .primary-gradient {
             background: linear-gradient(135deg, #FF6B6B 0%, #FFA07A 100%);
         }
         .text-primary {
-            color: #FF6B6B; /* A shade of the primary color for text */
+            color: #FF6B6B; /* Always red/orange */
         }
         .skill-tag {
             background-color: #fdd2c5;
             color: #d64d4d;
             font-weight: 600;
             padding: 0.5rem 1rem;
-            border-radius: 9999px; /* Pill shape */
-            transition: transform 0.2s;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* subtle shadow for pop */
+            border-radius: 9999px; 
+            transition: transform 0.2s, background-color 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
         .skill-tag:hover {
             transform: translateY(-2px);
@@ -36,7 +41,7 @@
         .section-heading-custom {
             font-size: 2.25rem;
             font-weight: 800;
-            color: #333;
+            color: #333; /* Explicitly dark */
             text-align: center;
             margin-bottom: 3rem;
             padding-top: 1rem;
@@ -53,50 +58,33 @@
             border-radius: 2px;
         }
         /* Styling for the Project card buttons */
-        .btn-demo {
-            background-color: #FF6B6B;
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(255, 107, 107, 0.4);
-            transition: background-color 0.2s, transform 0.2s;
-        }
-        .btn-demo:hover {
-            background-color: #d64d4d;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(255, 107, 107, 0.6);
-        }
         .btn-code {
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: #ffffff; /* Light background */
+            color: #333333; /* Dark text */
             padding: 0.5rem 1.5rem;
-            border: 1px solid #ddd;
+            border: 1px solid #eee;
             border-radius: 0.5rem;
             font-weight: 600;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             transition: background-color 0.2s, transform 0.2s;
         }
         .btn-code:hover {
-            background-color: #e0e0e0;
+            background-color: #eee;
             transform: translateY(-1px);
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        /* Style for the illustration in the contact section - FIX APPLIED HERE */
-        .contact-illustration {
-            width: 100%;
-            /* Removed fixed height to allow image to scale naturally */
-            max-width: 350px; /* Slightly increased max width for better visibility */
-            height: auto;
-        }
-        /* Style for project preview images to match the reference card design */
-        .project-preview {
-            width: 100%;
-            height: 150px; /* Fixed height for consistent card size */
-            object-fit: cover;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
+        /* Card Styling */
+        .project-card, .scroll-card-item {
+            background-color: #ffffff;
             border: 1px solid #eee;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .profile-picture {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
         /* Custom styles for the horizontal sliding/scrolling section */
         .scroll-container {
@@ -108,7 +96,7 @@
         }
         .scroll-cards {
             display: flex;
-            flex-wrap: nowrap; /* Prevents cards from wrapping to a new line */
+            flex-wrap: nowrap; /* Forces horizontal layout */
             gap: 1.5rem;
             padding: 0 0.5rem; /* Small internal padding for edges */
         }
@@ -116,17 +104,10 @@
             flex: 0 0 auto; /* Ensures cards maintain their size */
             width: 300px; /* Fixed width for the card item */
             min-height: 400px; /* Ensure visual consistency */
-            background-color: white;
-            border: 1px solid #10b981; /* Green border from reference image */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #10b981; 
             border-radius: 1rem;
             padding: 1rem;
-            transition: all 0.3s ease;
-            position: relative; /* For aligning certificate image */
             scroll-snap-align: center; /* Snaps the center of the card to the scroll position */
-        }
-        .scroll-card-item:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
         .cert-image {
             width: 100%;
@@ -134,13 +115,6 @@
             object-fit: cover;
             border-radius: 0.5rem;
             margin-bottom: 0.75rem;
-        }
-        /* Custom style for the Profile Picture in About section */
-        .profile-picture {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
         }
     </style>
 </head>
@@ -154,9 +128,9 @@
                 <span class="text-sm font-light text-white opacity-90">Full Stack Web Developer</span>
             </div>
             
-            <!-- Desktop Navigation Links (Updated - Removed Education link) -->
-            <div class="hidden sm:flex space-x-6">
-                <!-- Resume Link (UPDATED: Added Raw GitHub URL) -->
+            <!-- Desktop Navigation Links -->
+            <div class="hidden sm:flex space-x-6 items-center">
+                <!-- Resume Link -->
                 <a href="https://raw.githubusercontent.com/Chethanasn/portfolio/main/Resume.jpg" target="_blank" class="text-white hover:text-gray-200 transition duration-150 font-medium flex items-center">
                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     Resume
@@ -177,9 +151,11 @@
             </div>
             
             <!-- Mobile Menu Button (Hamburger) -->
-            <button id="mobile-menu-button" class="sm:hidden p-2 rounded-md text-white hover:bg-white hover:text-gray-800 transition duration-150" aria-label="Toggle Menu">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
+            <div class="flex items-center">
+                <button id="mobile-menu-button" class="sm:hidden p-2 rounded-md text-white hover:bg-white hover:text-gray-800 transition duration-150" aria-label="Toggle Menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
         </nav>
 
         <!-- Mobile Menu (Hidden by default) - White background for contrast -->
@@ -196,16 +172,16 @@
     <!-- Main Content Container -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-        <!-- Home/About Section (Hero - Reduced Vertical Padding) -->
-        <section id="home" class="py-10"> <!-- Adjusted to py-10 for minimal spacing after sticky header -->
+        <!-- Home/About Section -->
+        <section id="home" class="py-10"> <!-- Minimal spacing after sticky header -->
             <h2 class="section-heading-custom text-primary">ABOUT ME</h2>
             
             <div id="about" class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
                 
                 <!-- Left Column (Text) -->
                 <div class="md:col-span-2 text-lg text-gray-700 space-y-4">
-                    <p>Hello, I'm <strong class="text-primary">Chethana SN</strong>, a passionate Computer Application graduate with a keen eye for detail and a love for creating seamless user experiences.</p>
-                    <p>I specialized in Web Full Stack Development and Data Science, utilizing skills in Python, HTML, CSS, and JavaScript to build secure, scalable applications.</p>
+                    <p>Hello, I'm <strong class="text-black font-extrabold">Chethana SN</strong>, a passionate Computer Application graduate with a keen eye for detail and a love for creating seamless user experiences.</p>
+                    <p>I specialize in Web Full Stack Development and Data Science, utilizing skills in Python, HTML, CSS, and JavaScript to build secure, scalable applications.</p>
                     <p>My goal is to craft efficient, beautiful, and interactive applications that solve real-world problems through clean and well-structured code. I'm actively expanding my knowledge in new tools and frameworks in the development ecosystem.</p>
                     
                     <!-- Buttons removed -->
@@ -267,7 +243,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Project 1: Vet Ventures (FIXED CODE LINK) -->
+                <!-- Project 1: Vet Ventures -->
                 <div class="project-card bg-white p-6 rounded-xl shadow-lg border-b-4 border-gray-100 hover:shadow-2xl transition duration-500 flex flex-col justify-between">
                     <div>
                         <!-- Project Image: Vet Ventures -->
@@ -281,16 +257,15 @@
                         <h4 class="text-xl font-bold text-gray-900 mb-2">Vet Ventures</h4>
                         <p class="text-sm font-medium text-primary mb-3">Full Stack Developer | May 2024 - June 2024</p>
                         <p class="text-gray-700 mb-4 text-sm">Developed a web application that digitizes veterinary clinic workflows The project offers features for appointment booking,patient management, and veterinary record keeping.
-Demonstrated expertise in full-stack development, user experience design, and healthcare software solutions.</p>
+Demonstratedexpertisein full-stackdevelopment, user experience design, and healthcare software solutions.</p>
                         <p class="text-xs font-semibold text-gray-500 mb-4">Tech Stack: MySQL, HTML, CSS, JavaScript , PHP</p>
                     </div>
-                    <div class="flex space-x-3 mt-4">
-                        <a href="#" target="_blank" class="btn-demo text-center">View Demo</a>
-                        <a href="https://github.com/Chethanasn/Vet-ventures" target="_blank" class="btn-code text-center">View Code</a>
+                    <div class="flex justify-center mt-4"> 
+                        <a href="https://github.com/Chethanasn/Vet-ventures" target="_blank" class="btn-code w-full text-center">View Code</a>
                     </div>
                 </div>
 
-                <!-- Project 2: Animae Enigma (FIXED CODE LINK & DESCRIPTION) -->
+                <!-- Project 2: Animae Enigma -->
                 <div class="project-card bg-white p-6 rounded-xl shadow-lg border-b-4 border-gray-100 hover:shadow-2xl transition duration-500 flex flex-col justify-between">
                     <div>
                         <!-- Project Image: Animae Enigma -->
@@ -306,13 +281,12 @@ Demonstrated expertise in full-stack development, user experience design, and he
                          <p class="text-gray-700 mb-4 text-sm">Developed an interactive web application that gamifies anime character recognition using deep learning and image processing. The app features multi-level gameplay, including blurred image guessing and tile-based puzzles.</p>
                         <p class="text-xs font-semibold text-gray-500 mb-4">Tech Stack: Python, TensorFlow, Streamlit, HTML, CSS, JavaScript</p>
                     </div>
-                    <div class="flex space-x-3 mt-4">
-                        <a href="#" target="_blank" class="btn-demo text-center">View Demo</a>
-                        <a href="https://github.com/Chethanasn/animae-enigma." target="_blank" class="btn-code text-center">View Code</a>
+                    <div class="flex justify-center mt-4"> 
+                        <a href="https://github.com/Chethanasn/animae-enigma." target="_blank" class="btn-code w-full text-center">View Code</a>
                     </div>
                 </div>
                 
-                <!-- Project 3: Mind Sprint (FIXED CODE LINK) -->
+                <!-- Project 3: Mind Sprint -->
                 <div class="project-card bg-white p-6 rounded-xl shadow-lg border-b-4 border-gray-100 hover:shadow-2xl transition duration-500 flex flex-col justify-between">
                     <div>
                         <!-- Project Image: Mind Sprint -->
@@ -328,13 +302,12 @@ Demonstrated expertise in full-stack development, user experience design, and he
                         <p class="text-gray-700 mb-4 text-sm">Mind Sprint is an innovative educational platform where students can learn through video lessons, access PDF study materials, and get instant support from an integrated AI chatbot. With a simple and intuitive interface, it helps learners study anytime, anywhere with ease.</p>
                         <p class="text-xs font-semibold text-gray-500 mb-4">Tech Stack: HTML, CSS, JavaScript, PHP, MySQL</p>
                     </div>
-                    <div class="flex space-x-3 mt-4">
-                        <a href="#" target="_blank" class="btn-demo text-center">View Demo</a>
-                        <a href="https://github.com/Chethanasn/Mind_Sprint" target="_blank" class="btn-code text-center">View Code</a>
+                    <div class="flex justify-center mt-4"> 
+                        <a href="https://github.com/Chethanasn/Mind_Sprint" target="_blank" class="btn-code w-full text-center">View Code</a>
                     </div>
                 </div>
 
-                <!-- Project 4: Document Tracking System (FIXED CODE LINK) -->
+                <!-- Project 4: Document Tracking System -->
                 <div class="project-card bg-white p-6 rounded-xl shadow-lg border-b-4 border-gray-100 hover:shadow-2xl transition duration-500 flex flex-col justify-between">
                     <div>
                         <!-- Project Image: Document Tracking System -->
@@ -353,13 +326,12 @@ It enables efficient tracking, quick retrieval, and real-time status updates, en
 management efficiency.</p>
                         <p class="text-xs font-semibold text-gray-500 mb-4">Tech Stack: Android, Gradle, Firebase, Java, MVVM Architecture</p>
                     </div>
-                    <div class="flex space-x-3 mt-4">
-                        <a href="#" target="_blank" class="btn-demo text-center">View Demo</a>
-                        <a href="https://github.com/Chethanasn/Document_Tracking_System" target="_blank" class="btn-code text-center">View Code</a>
+                    <div class="flex justify-center mt-4"> 
+                        <a href="https://github.com/Chethanasn/Document_Tracking_System" target="_blank" class="btn-code w-full text-center">View Code</a>
                     </div>
                 </div>
 
-                <!-- Project 5: SweetShop Management System (FIXED CODE LINK) -->
+                <!-- Project 5: SweetShop Management System -->
                 <div class="project-card bg-white p-6 rounded-xl shadow-lg border-b-4 border-gray-100 hover:shadow-2xl transition duration-500 flex flex-col justify-between">
                     <div>
                         <!-- Project Image: SweetShop Management System -->
@@ -376,9 +348,8 @@ management efficiency.</p>
 authentication.</p>
                         <p class="text-xs font-semibold text-gray-500 mb-4">Tech Stack: HTML, CSS, JavaScript, React , TypeScript , Node.js</p>
                     </div>
-                    <div class="flex space-x-3 mt-4">
-                        <a href="#" target="_blank" class="btn-demo text-center">View Demo</a>
-                        <a href="https://github.com/Chethanasn/Sweet_Shop_Management_System" target="_blank" class="btn-code text-center">View Code</a>
+                    <div class="flex justify-center mt-4"> 
+                        <a href="https://github.com/Chethanasn/Sweet_Shop_Management_System" target="_blank" class="btn-code w-full text-center">View Code</a>
                     </div>
                 </div>
             </div>
@@ -393,9 +364,9 @@ authentication.</p>
                 <div class="scroll-cards">
                     
                     <!-- Card 3: Microsoft FullStack Developer Certification -->
-                    <div class="scroll-card-item bg-white">
+                    <div class="scroll-card-item p-6 rounded-xl shadow-lg">
                         <div class="pb-4 mb-2">
-                            <img src="https://placehold.co/100x120/d1e7c5/10b981?text=Cert%5C1Image" alt="Certificate Placeholder" class="cert-image">
+                            <img src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/Certificate5.jpg" alt="Microsoft FullStack Developer Certificate" class="cert-image" onerror="this.onerror=null; this.src='https://placehold.co/100x120/d1e7c5/10b981?text=Cert%5C1Image';">
                             <h4 class="text-lg font-bold text-gray-900">Microsoft FullStack Developer</h4>
                             <p class="text-primary font-medium text-sm">Coursera</p>
                         </div>
@@ -408,8 +379,8 @@ authentication.</p>
                         </div>
                     </div>
                     
-                    <!-- Card 4: Data Analytics Certification (UPDATED IMAGE LINK) -->
-                     <div class="scroll-card-item bg-white">
+                    <!-- Card 4: Data Analytics Certification -->
+                     <div class="scroll-card-item p-6 rounded-xl shadow-lg">
                          <div class="pb-4 mb-2">
                             <img src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/Certificate3.jpg" alt="Data Analytics Certificate" class="cert-image" onerror="this.onerror=null; this.src='https://placehold.co/100x120/f9f6e8/8d6e38?text=Cert%5C2Image';">
                             <h4 class="text-lg font-bold text-gray-900">Data Analytics using ChatGPT with Excel and Python</h4>
@@ -424,8 +395,8 @@ authentication.</p>
                         </div>
                     </div>
                     
-                    <!-- Card 5: Advanced Styling Certification (UPDATED IMAGE LINK) -->
-                     <div class="scroll-card-item bg-white">
+                    <!-- Card 5: Advanced Styling Certification -->
+                     <div class="scroll-card-item p-6 rounded-xl shadow-lg">
                          <div class="pb-4 mb-2">
                             <img src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/Certificate1.jpg" alt="Advanced Styling Certificate" class="cert-image" onerror="this.onerror=null; this.src='https://placehold.co/100x120/c2d3ff/007bff?text=Cert%5C3Image';">
                             <h4 class="text-lg font-bold text-gray-900">Advanced Styling with Responsive Design</h4>
@@ -440,8 +411,8 @@ authentication.</p>
                         </div>
                     </div>
 
-                    <!-- Card 6: UI Design Certification (UPDATED IMAGE LINK) -->
-                     <div class="scroll-card-item bg-white">
+                    <!-- Card 6: UI Design Certification -->
+                     <div class="scroll-card-item p-6 rounded-xl shadow-lg">
                          <div class="pb-4 mb-2">
                             <img src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/Certificate2.jpg" alt="Visual Elements of User Interface Design Certificate" class="cert-image" onerror="this.onerror=null; this.src='https://placehold.co/100x120/f9f6e8/8d6e38?text=Cert%5C4Image';">
                             <h4 class="text-lg font-bold text-gray-900">Visual Elements of User Interface Design</h4>
@@ -456,8 +427,8 @@ authentication.</p>
                         </div>
                     </div>
                     
-                    <!-- Card 7: Prompt Engineering Certification (UPDATED IMAGE LINK) -->
-                     <div class="scroll-card-item bg-white">
+                    <!-- Card 7: Prompt Engineering Certification -->
+                     <div class="scroll-card-item p-6 rounded-xl shadow-lg">
                          <div class="pb-4 mb-2">
                             <img src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/Certificate4.jpg" alt="Prompt Engineering Certificate" class="cert-image" onerror="this.onerror=null; this.src='https://placehold.co/100x120/d1e7c5/10b981?text=Cert%5C5Image';">
                             <h4 class="text-lg font-bold text-gray-900">Prompt Engineering for ChatGPT</h4>
@@ -478,7 +449,7 @@ authentication.</p>
 
         </section>
 
-        <!-- Contact Section (Mimicking the form layout from image_af9a9b.jpg) -->
+        <!-- Contact Section (UPDATED TO FORM STRUCTURE) -->
         <section id="contact" class="py-16 border-t border-gray-100">
             <h2 class="section-heading-custom text-primary">CONTACT ME</h2>
             
@@ -486,7 +457,6 @@ authentication.</p>
                 
                 <!-- Left Column (Illustration) -->
                 <div class="flex justify-center items-center h-full hidden md:flex">
-                    <!-- FINAL FIX: Inserted the user's Raw GitHub Image URL for contact illustration -->
                     <img 
                         src="https://raw.githubusercontent.com/Chethanasn/portfolio/main/1.jpg" 
                         alt="Contact Illustration: Chethana on the phone" 
@@ -496,23 +466,28 @@ authentication.</p>
                 </div>
 
                 <!-- Right Column (Contact Form) -->
-                <div class="space-y-4">
+                <!-- Converted div to form for submission readiness -->
+                <form action="YOUR_FORMSPREE_ENDPOINT" method="POST" class="space-y-4">
                     <div class="space-y-2">
                         <label for="name" class="font-medium text-gray-700">Name:</label>
-                        <input type="text" id="name" placeholder="Enter your name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150">
+                        <!-- Added name attribute -->
+                        <input type="text" id="name" name="name" placeholder="Enter your name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" required>
                     </div>
                     <div class="space-y-2">
                         <label for="email" class="font-medium text-gray-700">Email:</label>
-                        <input type="email" id="email" placeholder="Enter your email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150">
+                        <!-- Added name attribute -->
+                        <input type="email" id="email" name="_replyto" placeholder="Enter your email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" required>
                     </div>
                     <div class="space-y-2">
                         <label for="message" class="font-medium text-gray-700">Message:</label>
-                        <textarea id="message" rows="4" placeholder="Your message" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150"></textarea>
+                        <!-- Added name attribute -->
+                        <textarea id="message" name="message" rows="4" placeholder="Your message" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" required></textarea>
                     </div>
-                    <button class="w-full primary-gradient text-white p-3 rounded-lg font-semibold shadow-lg hover:opacity-90 transition duration-300">
+                    <button type="submit" class="w-full primary-gradient text-white p-3 rounded-lg font-semibold shadow-lg hover:opacity-90 transition duration-300">
                         Send <span class="ml-2">&#x27A4;</span>
                     </button>
-                </div>
+                    <p class="text-xs text-red-500 text-center pt-2">IMPORTANT: Replace 'YOUR_FORMSPREE_ENDPOINT' in the code with your live form URL after hosting.</p>
+                </form>
             </div>
         </section>
 
@@ -565,7 +540,7 @@ authentication.</p>
                         <a href="https://github.com/Chethanasn" target="_blank" class="hover:text-gray-200 transition duration-150" aria-label="GitHub">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.833 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.003.404 2.294-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.772.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.792 24 17.291 24 12c0-6.627-5.373-12-12-12z"/></svg>
                         </a>
-                        <!-- Mail Icon -->
+                        <!-- Mail Icon (Updated to Gmail Compose URL) -->
                          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=chethanasn2003@gmail.com" target="_blank" class="hover:text-gray-200 transition duration-150" aria-label="Email (Open in Gmail)">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12.713l-12-9.713h24l-12 9.713zm0 2.583l-12-9.713v15.426h24v-15.426l-12 9.713z"/></svg>
                         </a>
@@ -585,6 +560,7 @@ authentication.</p>
     <!-- JavaScript for Mobile Menu Functionality (and AUTO SCROLL) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            
             // --- Mobile Menu Toggle Logic ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -606,22 +582,29 @@ authentication.</p>
             const scrollCards = document.querySelector('.scroll-cards');
             const cardCount = scrollCards.children.length;
 
-            if (scrollContainer && cardCount > 1) {
-                // Width of a single card + its gap (300px card width + 1.5rem gap = 324px)
-                const cardWidthWithMargin = 300 + (1.5 * parseFloat(getComputedStyle(scrollContainer).fontSize)); 
-                let scrollPosition = 0;
+            let scrollInterval;
+            
+            const startAutoScroll = () => {
+                if (!scrollContainer || cardCount <= 1) return;
+
+                // Calculate the width of one card plus its gap (300px + 1.5rem gap)
+                const gap = 1.5 * parseFloat(getComputedStyle(scrollContainer).fontSize);
+                const cardWidthWithMargin = 300 + gap; 
+                
+                let scrollPosition = scrollContainer.scrollLeft;
 
                 const autoScroll = () => {
                     // Check if we are at the end of the scrollable content
-                    if (scrollPosition >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-                        // Reset to the start
+                    const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+                    if (scrollPosition >= maxScroll - 10) { // Added tolerance of 10px
+                        // Reset scroll position
                         scrollPosition = 0;
                     } else {
-                        // Move one card forward
+                        // Move one card width forward
                         scrollPosition += cardWidthWithMargin;
-                        // Clamp to maximum scroll position
-                        if (scrollPosition > scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-                             scrollPosition = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+                        // Clamp to maximum scroll position if overshoot is detected
+                        if (scrollPosition > maxScroll) {
+                             scrollPosition = maxScroll;
                         }
                     }
 
@@ -631,19 +614,26 @@ authentication.</p>
                     });
                 };
 
-                // Start the automatic scroll interval (e.g., every 4 seconds)
-                let scrollInterval = setInterval(autoScroll, 4000);
+                // Clear any existing interval before setting a new one
+                stopAutoScroll(); 
+                scrollInterval = setInterval(autoScroll, 4000);
+            };
 
-                // Pause scrolling when the user hovers over the container (desktop experience)
-                scrollContainer.addEventListener('mouseover', () => {
-                    clearInterval(scrollInterval);
-                });
+            const stopAutoScroll = () => {
+                clearInterval(scrollInterval);
+                scrollInterval = null;
+            };
 
-                // Resume scrolling when the user moves the mouse away (desktop experience)
-                scrollContainer.addEventListener('mouseleave', () => {
-                    scrollInterval = setInterval(autoScroll, 4000);
-                });
-            }
+
+            // Start auto-scroll on load
+            startAutoScroll();
+
+            // Pause scrolling when the user hovers over the container (desktop experience)
+            scrollContainer.addEventListener('mouseenter', stopAutoScroll);
+
+            // Resume scrolling when the user moves the mouse away (desktop experience)
+            scrollContainer.addEventListener('mouseleave', startAutoScroll);
+
         });
     </script>
 </body>
